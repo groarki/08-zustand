@@ -37,8 +37,8 @@ const NoteForm = () => {
     const rawTag = formData.get("category")?.toString() || "Todo";
   
     const values = {
-      title: formData.get("title")?.toString() || "",
-      content: formData.get("content")?.toString() || "",
+      title: formData.get("title") as string,
+      content: formData.get("content") as string,
       tag: rawTag as Tags,
     };
   
