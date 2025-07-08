@@ -10,6 +10,29 @@ type NoteDetailsProps = {
   params: Promise<{ id: number }>;
 };
 
+export async function generateMetadata({params}: NoteDetailsProps) {
+  const { id } = await params
+  const noteId = Number(id)
+  const note = await getSingleNote(noteId)
+
+  return {
+    title: `Note: ${note.title}`,
+    description: note.content.slice(0, 30),
+    openGraph: {
+      title: `Note: ${note.title}`,
+      description: note.content.slice(0, 30),
+      url: `http://localhost:3000/notes/${id}`,
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+        },
+      ]
+    }
+  }
+}
+
 const NoteDetails = async ({ params }: NoteDetailsProps) => {
   const { id } = await params;
   const queryClient = new QueryClient();
