@@ -19,7 +19,7 @@ const category = slug[0] || "all";
     openGraph: {
       title,
       description,
-      url: `http://localhost:3000/notes/filter/${tag}`,
+      url: `https://08-zustand-eight-cyan.vercel.app/notes/filter/${tag}`,
       images: [
         {
           url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
