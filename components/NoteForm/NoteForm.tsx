@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote, } from '@/lib/api';
 import { useNoteStore } from "@/lib/store/noteStore"
 import css from "./NoteForm.module.css"
@@ -10,6 +10,7 @@ import { Tags } from '@/types/note';
 import { useId } from 'react';
 
 const NoteForm = () => {
+  const queryClient = useQueryClient()
   const router = useRouter();
   const id = useId()
 
@@ -25,6 +26,7 @@ const NoteForm = () => {
   const { mutate } = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['notes']})
       clearDraft();
       router.push('/notes/filter/all');
     },
@@ -74,7 +76,7 @@ const NoteForm = () => {
 
       <div className={css.formGroup}>
         <label htmlFor={`${id}-tag`}>Category</label>
-       <select id={`${id}-tag`} name="category" className={css.select} defaultValue={draft?.tag} onChange={handleChange}>
+       <select id={`${id}-tag`} name="tag" className={css.select} defaultValue={draft?.tag} onChange={handleChange}>
             {categories.map((category) => (
               <option key={category} value={category}>
                 {category}
