@@ -8,7 +8,7 @@ import NoteDetailsClient from "./NoteDetails.client";
 import { Metadata } from "next";
 
 type NoteDetailsProps = {
-  params: Promise<{ id: number }>;
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({params}: NoteDetailsProps): Promise<Metadata> {

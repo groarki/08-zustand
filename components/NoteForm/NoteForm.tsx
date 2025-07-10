@@ -36,7 +36,7 @@ const NoteForm = () => {
 
   
   const handleSubmit = (formData: FormData) => {
-    const rawTag = formData.get("category")?.toString() || "Todo";
+    const rawTag = formData.get("tag")?.toString() || "Todo";
   
     const values = {
       title: formData.get("title") as string,
